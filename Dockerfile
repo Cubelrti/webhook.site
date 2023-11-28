@@ -27,7 +27,8 @@ USER www-data
 
 ADD --chown=www-data:www-data /composer.json /var/www/html
 ADD --chown=www-data:www-data /composer.lock /var/www/html
-
+RUN composer config -g repos.packagist composer https://mirrors.tencent.com/composer/
+RUN composer config -g secure-http false
 RUN composer global require hirak/prestissimo \
     && composer install --no-interaction --no-autoloader --no-dev --prefer-dist --no-scripts \
     && rm -rf /home/www-data/.composer/cache
